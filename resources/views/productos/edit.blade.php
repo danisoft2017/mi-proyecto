@@ -1,29 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+@extends('layouts.app')
+@section('title', 'Editar Producto')
+@section('content')
     <h1>Editar Producto</h1>
-    <form action="{{ route('productos.update', $producto->id) }}" method="POST">
+    <form action="{{ route('productos.update', $producto->id) }}" method="POST" >
         @csrf
         @method('PUT')
 
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" value="{{ $producto->nombre }}" required>
-        <br>
-        <label for="precio">Precio:</label>
-        <input type="number" id="precio" name="precio" step="0.01" value="{{ $producto->precio }}" required>
-        <br>
-        <label for="stock">Stock:</label>
-        <input type="number" id="stock" name="stock" value="{{ $producto->stock }}" required>
-        <br>
-        <button type="submit">Actualizar Producto</button>
+        <div class="form-group">
+          <label for="">Nombre</label>
+          <input type="text" name="nombre" id="nombre" class="form-control" value="{{ $producto->nombre }}">
+        </div>
+
+        <div class="form-group">
+          <label for="">Precio</label>
+          <input type="text" name="precio" id="precio" class="form-control" value="{{ $producto->precio }}">
+        </div>
+
+        <div class="form-group">
+          <label for="stock">Stock:</label>
+          <input type="number" id="stock" name="stock" class="form-control" value="{{ $producto->stock }}" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">Actualizar Producto</button>
     </form>
     <br>
-    <a href="{{ route('productos.index') }}">Volver a la lista de productos</a>
-
-</body>
-</html>
+    <a href="{{ route('productos.index') }}" class="btn btn-secondary">Volver a la lista de productos</a>
+@endsection

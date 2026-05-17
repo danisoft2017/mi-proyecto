@@ -1,26 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+
+@extends('layouts.app')
+@section('title', 'Crear Producto')
+@section('content')
     <h1>Crear Producto</h1>
     <form action="{{ route('productos.store') }}" method="POST">
         @csrf
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
-        <br>
-        <label for="precio">Precio:</label>
-        <input type="number" id="precio" name="precio" step="0.01" required>
-        <br>
-        <label for="stock">Stock:</label>
-        <input type="number" id="stock" name="stock" required>
-        <br>
-        <button type="submit">Crear Producto</button>
+        <div class="form-group">
+          <label for="">Nombre</label>
+          <input type="text" class="form-control" name="nombre" id="nombre" required>
+        </div>
+
+        <div class="form-group">
+          <label for="">Precio</label>
+          <input type="number" step="0.01" class="form-control" name="precio" id="precio" required>
+        </div>
+
+        <div class="form-group">
+          <label for="">Stock</label>
+          <input type="text" class="form-control" name="stock" id="stock" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Crear Producto</button>
     </form>
     <br>
-    <a href="{{ route('productos.index') }}">Volver a la lista de productos</a>
-</body>
-</html>
+    <a href="{{ route('productos.index') }}" class="btn btn-secondary">Volver a la lista de productos</a>
+@endsection
