@@ -2,7 +2,10 @@
 @section('title', 'Productos')
 @section('content')
     <h1>Lista de productos</h1>
-    <a href="{{ route('productos.create') }}" class="btn btn-primary mb-3">Nuevo Producto</a>
+    <div class="btn-group mb-3" role="group" aria-label="Basic example">
+        <a href="{{ route('inicio') }}" class="btn btn-secondary"><i class="fa-solid fa-house"></i></a>
+        <a href="{{ route('productos.create') }}" class="btn btn-primary">Nuevo Producto</a>
+    </div>
     <br>
     @if (session('success'))
         <div style="color: green;">

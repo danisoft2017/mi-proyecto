@@ -9,5 +9,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Clientes extends Model
 {
     use HasFactory;
-    protected $table = 'clientes';
+    protected $fillable = [
+        'nombre',
+        'email',
+        'telefono',
+        'direccion'
+    ];
 }
