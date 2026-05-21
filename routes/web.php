@@ -11,3 +11,4 @@ Route::get('/', function () {
 Route::resource('productos', ProductoController::class);
 Route::get('/posts', [PostController::class,'index']);
 Route::get('/posts/{id}', [PostController::class,'show']);
+
