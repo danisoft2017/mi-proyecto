@@ -8,7 +8,8 @@ use App\Http\Controllers\ClientesController;
 Route::get('/', function () {
     return view('inicio');
 })->name('inicio');
-Route::resource('productos', ProductoController::class);
+Route::resource('producto', ProductoController::class);
+
 Route::get('/posts', [PostController::class,'index']);
 Route::get('/posts/{id}', [PostController::class,'show']);
 

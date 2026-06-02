@@ -6,6 +6,6 @@
     <p><strong>Nombre:</strong> {{ $producto->nombre }}</p>
     <p><strong>Precio:</strong> {{ $producto->precio }}</p>
     <p><strong>Stock:</strong> {{ $producto->stock }}</p>
-    <a href="{{ route('productos.index') }}" class="btn btn-secondary">Volver a la lista de productos</a>
-    <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-primary">Editar Producto</a>
+    <a href="{{ route('producto.index') }}" class="btn btn-secondary">Volver a la lista de productos</a>
+    <a href="{{ route('producto.edit', $producto->id) }}" class="btn btn-primary">Editar Producto</a>
 @endsection

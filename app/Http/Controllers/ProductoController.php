@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Producto;
+use App\Http\Requests\ProductoPostRequest;
 
 class ProductoController extends Controller
 {
@@ -12,8 +13,8 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos = Producto::all();
-        return view('productos.index', compact('productos'));
+        $producto = Producto::all();
+        return view('producto.index', compact('producto'));
     }
 
     /**
@@ -21,21 +22,16 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        return view('productos.create');
+        return view('producto.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductoPostRequest $request)
     {
-        $request->validate([
-            'nombre' => 'required',
-            'precio' => 'required|numeric',
-            'stock' => 'required|integer',
-        ]);
         Producto::create($request->all());
-        return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
+        return redirect()->route('producto.index') ->with('success', 'Producto creado exitosamente.');
     }
 
     /**
@@ -44,7 +40,7 @@ class ProductoController extends Controller
     public function show(string $id)
     {
         $producto = Producto::findOrFail($id);
-        return view('productos.show', compact('producto'));
+        return view('producto.show', compact('producto'));
     }
 
     /**
@@ -53,24 +49,18 @@ class ProductoController extends Controller
     public function edit(string $id)
     {
         $producto = Producto::findOrFail($id);
-        return view('productos.edit', compact('producto'));
+        return view('producto.edit', compact('producto'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductoPostRequest $request, string $id)
     {
-        $request->validate([
-            'nombre' => 'required',
-            'precio' => 'required|numeric',
-            'stock' => 'required|integer',
-        ]);
-
         $producto = Producto::findOrFail($id);
-        $producto->update($request->all());
+        $producto->update($request->all($producto));
 
-        return redirect()->route('productos.index')->with('success', 'Producto actualizado exitosamente.');
+        return redirect()->route('producto.index')->with('success', 'Producto actualizado exitosamente.');
     }
 
     /**
@@ -80,6 +70,6 @@ class ProductoController extends Controller
     {
         $producto = Producto::findOrFail($id);
         $producto->delete();
-        return redirect()->route('productos.index')->with('success', 'Producto eliminado exitosamente.');
+        return redirect()->route('producto.index')->with('success', 'Producto eliminado exitosamente.');
     }
 }
