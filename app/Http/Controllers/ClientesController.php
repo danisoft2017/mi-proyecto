@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Clientes;
+use App\Http\Requests\ClientePostRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ClientesCreatedMailable;
 
 class ClientesController extends Controller
 {
@@ -27,15 +30,11 @@ class ClientesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ClientePostRequest $request)
     {
-        $request->validate([
-            'nombre' => 'required',
-            'email' => 'required|email|unique:clientes,email',
-            'telefono' => 'required',
-            'direccion' => 'required',
-        ]);
+
         Clientes::create($request->all());
+        Mail::to($request->email)->send(new ClientesCreatedMailable);
         return redirect()->route('clientes.index')->with('success', 'Cliente creado exitosamente.');
     }
 
@@ -60,14 +59,8 @@ class ClientesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ClientePostRequest $request, string $id)
     {
-        $request->validate([
-            'nombre' => 'required',
-            'email' => 'required|email',
-            'telefono' => 'required',
-            'direccion' => 'required',
-        ]);
 
         $cliente = Clientes::findOrFail($id);
         $cliente->update($request->all());
