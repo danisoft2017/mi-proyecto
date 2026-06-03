@@ -9,6 +9,7 @@ use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 use App\Models\Clientes;
 
 class ClientesCreatedMailable extends Mailable
@@ -18,8 +19,8 @@ class ClientesCreatedMailable extends Mailable
     /**
      * Create a new message instance.
      */
-    public clientes $clientes;
-    public function __construct(clientes $clientes)
+    public $clientes;
+    public function __construct($clientes)
     {
         $this->clientes = $clientes;
     }
@@ -30,7 +31,7 @@ class ClientesCreatedMailable extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: 'Lw1oU@example.com',
+            from: new Address('Lw1oU@example.com', "Correo de Mi"),
             subject: 'Clientes Created Mailable',
         );
     }
@@ -41,7 +42,7 @@ class ClientesCreatedMailable extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.clientes.created',
+            markdown: 'mail.clientes-created',
         );
     }
 

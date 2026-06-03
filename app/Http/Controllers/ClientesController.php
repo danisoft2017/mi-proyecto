@@ -33,8 +33,8 @@ class ClientesController extends Controller
     public function store(ClientePostRequest $request)
     {
 
-        Clientes::create($request->all());
-        Mail::to($request->email)->send(new ClientesCreatedMailable);
+        $clientes = Clientes::create($request->all());
+        Mail::to($request->email)->send(new ClientesCreatedMailable($clientes));
         return redirect()->route('clientes.index')->with('success', 'Cliente creado exitosamente.');
     }
 
